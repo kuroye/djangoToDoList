@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from todolist.models import Todo
@@ -8,7 +10,7 @@ from todolist.models import Todo
 def index(request):
     if request.method == 'GET':
         todos = Todo.objects.filter(creator=request.user)
-
+        # justify_time(todos)
         return render(request, 'index.html', context={'todos': todos})
 
     if request.method == 'POST':
@@ -35,3 +37,8 @@ def index(request):
             todo.is_finished = not todo.is_finished
             todo.save()
             return redirect(reverse('index'))
+
+def justify_time(todos):
+    for todo in todos:
+        todo.create_date = todo.create_date + timedelta(hours=6)
+        todo.save()
