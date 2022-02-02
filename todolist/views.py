@@ -9,7 +9,7 @@ from todolist.models import Todo
 @login_required
 def index(request):
     if request.method == 'GET':
-        todos = Todo.objects.filter(creator=request.user)
+        todos = Todo.objects.filter(creator=request.user).order_by('deadline')
         # justify_time(todos)
         return render(request, 'index.html', context={'todos': todos})
 
