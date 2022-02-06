@@ -34,7 +34,7 @@ def register_view(request):
             User.objects.get(username=username)
         except User.DoesNotExist:
             User.objects.create(username=username, password=make_password(password))
-            return render(request, template_name='login.html', context={'message': 'Register succeed'})
+            return redirect(reverse('login'), kwargs={'message': 'Register succeed'})
 
         return render(request, template_name='register.html', context={'error_message': 'Register failed'})
 
