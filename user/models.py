@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
-    pass
+    level = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'user'
