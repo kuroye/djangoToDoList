@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
-from todolist.models import Todo
+from todolist.models import Todo, User
 
 
 # Create your views here.
@@ -10,8 +10,11 @@ from todolist.models import Todo
 def index(request):
     if request.method == 'GET':
         todos = Todo.objects.filter(creator=request.user).order_by('deadline')
+        user = User.objects.filter(username=request.user)
+        max_xp = user.get('level') * user.get('level') * 100
         # justify_time(todos)
-        return render(request, 'index.html', context={'todos': todos})
+        return render(request, 'index.html', context={'todos': todos,
+                                                      'max_xp': max_xp})
 
     if request.method == 'POST':
         do = request.POST.get('do')
