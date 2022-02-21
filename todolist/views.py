@@ -11,10 +11,12 @@ def index(request):
     if request.method == 'GET':
         user = request.user
         todos = Todo.objects.filter(creator=user).order_by('deadline')
-        user1 = User.objects.filter(username=request.user)
-        current_level = user1[0].level
+        current_user = User.objects.filter(username=user)
+        current_level = current_user[0].level
+        if current_level == 0:
+            current_level = 1
+
         max_xp = pow(current_level, 2) * 100
-        # justify_time(todos)
         return render(request, 'index.html', context={'todos': todos,
                                                       'max_xp': max_xp})
 
@@ -34,6 +36,7 @@ def index(request):
             id = request.POST.get('id')
             todo = Todo.objects.get(id=id)
             todo.delete()
+            # 删除时+XP到User xp
             return redirect(reverse('index'), kwargs={'message': 'Deleted successful'})
 
         elif do == 'toggle_status':
