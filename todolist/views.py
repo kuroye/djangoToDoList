@@ -11,10 +11,8 @@ def index(request):
     if request.method == 'GET':
         user = request.user
         todos = Todo.objects.filter(creator=user).order_by('deadline')
-        current_user = User.objects.filter(username=user)
-        current_level = current_user[0].level
-        if current_level == 0:
-            current_level = 1
+        current_user = User.objects.get(id=user.id)
+        current_level = current_user.level
 
         max_xp = pow(current_level, 2) * 100
 
@@ -44,6 +42,7 @@ def index(request):
             id = request.POST.get('id')
             todo = Todo.objects.get(id=id)
             todo.is_finished = not todo.is_finished
+
             todo.save()
             return redirect(reverse('index'))
 
