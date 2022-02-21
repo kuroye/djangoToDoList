@@ -17,6 +17,7 @@ def index(request):
             current_level = 1
 
         max_xp = pow(current_level, 2) * 100
+
         return render(request, 'index.html', context={'todos': todos,
                                                       'max_xp': max_xp})
 
