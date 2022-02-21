@@ -85,7 +85,8 @@
 <div class="container d-flex flex-column mb-4 wrapper">
     <div class="w-100 d-flex justify-content-between align-items-center mt-3 mb-5 todo-list-header">
         <h1>{{ user.username }}: Lv.{{ user.level }}</h1>
-        <p>xp:{{ user.xp }}</p>
+        <b style="padding-right: 500px">xp:{{ user.xp }}/{{ max_xp }}</b>
+
         <a class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
     </div>
 
