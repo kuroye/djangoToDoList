@@ -9,9 +9,11 @@ from todolist.models import Todo, User
 @login_required
 def index(request):
     if request.method == 'GET':
-        todos = Todo.objects.filter(creator=request.user).order_by('deadline')
-        user = User.objects.filter(username=request.user)
-        max_xp = user.get('level') * user.get('level') * 100
+        user = request.user
+        todos = Todo.objects.filter(creator=user).order_by('deadline')
+        user1 = User.objects.filter(username=request.user)
+        current_level = user1[0].level
+        max_xp = pow(current_level, 2) * 100
         # justify_time(todos)
         return render(request, 'index.html', context={'todos': todos,
                                                       'max_xp': max_xp})
