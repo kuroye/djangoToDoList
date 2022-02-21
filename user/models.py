@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     level = models.IntegerField(default=0)
+    xp = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'user'
