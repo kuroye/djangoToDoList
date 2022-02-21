@@ -26,14 +26,21 @@ def index(request):
             title = request.POST.get('title')
             description = request.POST.get('description')
             deadline = request.POST.get('deadline')
+            xp = request.POST.get('xp')
+            # 下一步： 更新xp为选择困难度   xp自动生成
 
-            Todo.objects.create(title=title, description=description, deadline=deadline or None, creator=request.user)
+            Todo.objects.create(title=title, description=description, deadline=deadline or None, xp=xp or None, creator=request.user)
 
             return redirect(reverse('index'), kwargs={'message': 'Created successful'})
 
         elif do == 'delete':
             id = request.POST.get('id')
             todo = Todo.objects.get(id=id)
+
+            user = User.objects.get(id=request.user.id)
+            user.xp = user.xp + todo.xp
+            user.save()
+
             todo.delete()
             # 删除时+XP到User xp
             return redirect(reverse('index'), kwargs={'message': 'Deleted successful'})
