@@ -36,7 +36,7 @@ def index(request):
             difficulty = request.POST.get('difficulty')
             # 下一步： 更新xp为选择困难度   xp自动生成
             xp = evaluate_xp(difficulty)
-
+            print(xp)
             Todo.objects.create(title=title, description=description, deadline=deadline or None, xp=xp,
                                 difficulty=difficulty or None, creator=request.user)
 
@@ -51,7 +51,6 @@ def index(request):
             user.save()
 
             todo.delete()
-            # 删除时+XP到User xp
             return redirect(reverse('index'), kwargs={'message': 'Deleted successful'})
 
         elif do == 'toggle_status':
@@ -84,11 +83,11 @@ def calculate_max_xp(level):
 
 
 def evaluate_xp(difficulty):
-    if difficulty is 'easy':
+    if difficulty == 'easy':
         return random.randint(1, 20)
-    elif difficulty is 'medium':
+    elif difficulty == 'medium':
         return random.randint(20, 100)
-    elif difficulty is 'hard':
+    elif difficulty == 'hard':
         return random.randint(100, 500)
     elif difficulty is None:
         return 0
