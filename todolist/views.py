@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from todolist.models import Todo, User
+import random
 
 
 # Create your views here.
@@ -34,8 +35,10 @@ def index(request):
             # xp = request.POST.get('xp')
             difficulty = request.POST.get('difficulty')
             # 下一步： 更新xp为选择困难度   xp自动生成
+            xp = evaluate_xp(difficulty)
 
-            Todo.objects.create(title=title, description=description, deadline=deadline or None, difficulty=difficulty or None, creator=request.user)
+            Todo.objects.create(title=title, description=description, deadline=deadline or None, xp=xp,
+                                difficulty=difficulty or None, creator=request.user)
 
             return redirect(reverse('index'), kwargs={'message': 'Created successful'})
 
@@ -59,20 +62,33 @@ def index(request):
             todo.save()
             return redirect(reverse('index'))
 
+
 def justify_time(todos):
     for todo in todos:
         todo.create_date = todo.create_date + timedelta(hours=6)
         todo.save()
 
+
 def level_up(user, max_xp):
-    user.level = user.level+1
+    user.level = user.level + 1
 
     if user.xp >= max_xp:
         user.xp = user.xp - max_xp
 
     user.save()
 
+
 def calculate_max_xp(level):
     max_xp = pow(level, 2) * 100
     return max_xp
 
+
+def evaluate_xp(difficulty):
+    if difficulty is 'easy':
+        return random.randint(1, 20)
+    elif difficulty is 'medium':
+        return random.randint(20, 100)
+    elif difficulty is 'hard':
+        return random.randint(100, 500)
+    elif difficulty is None:
+        return 0
