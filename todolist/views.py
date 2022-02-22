@@ -31,10 +31,11 @@ def index(request):
             title = request.POST.get('title')
             description = request.POST.get('description')
             deadline = request.POST.get('deadline')
-            xp = request.POST.get('xp')
+            # xp = request.POST.get('xp')
+            difficulty = request.POST.get('difficulty')
             # 下一步： 更新xp为选择困难度   xp自动生成
 
-            Todo.objects.create(title=title, description=description, deadline=deadline or None, xp=xp or None, creator=request.user)
+            Todo.objects.create(title=title, description=description, deadline=deadline or None, difficulty=difficulty or None, creator=request.user)
 
             return redirect(reverse('index'), kwargs={'message': 'Created successful'})
 
