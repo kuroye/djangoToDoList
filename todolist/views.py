@@ -11,10 +11,15 @@ def index(request):
     if request.method == 'GET':
         user = request.user
         todos = Todo.objects.filter(creator=user).order_by('deadline')
-        current_user = User.objects.get(id=user.id)
-        current_level = current_user.level
 
-        max_xp = pow(current_level, 2) * 100
+        current_level = user.level
+
+        max_xp = calculate_max_xp(current_level)
+
+        while user.xp >= max_xp:
+            level_up(user, max_xp)
+            user = request.user
+            max_xp = calculate_max_xp(user.level)
 
         return render(request, 'index.html', context={'todos': todos,
                                                       'max_xp': max_xp})
@@ -57,3 +62,16 @@ def justify_time(todos):
     for todo in todos:
         todo.create_date = todo.create_date + timedelta(hours=6)
         todo.save()
+
+def level_up(user, max_xp):
+    user.level = user.level+1
+
+    if user.xp >= max_xp:
+        user.xp = user.xp - max_xp
+
+    user.save()
+
+def calculate_max_xp(level):
+    max_xp = pow(level, 2) * 100
+    return max_xp
+
