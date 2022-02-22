@@ -139,8 +139,15 @@
                                                 <p>deadline {{ todo.deadline }}</p>
                                             </div>
                                             <hr>
-                                            <h4>XP</h4>
-                                            <p>{{ todo.xp }}</p>
+                                            <div class="w-100 d-flex justify-content-between align-items-center mt mb">
+                                                <h4>xp</h4>
+                                                <b>{{ todo.xp }} xp</b>
+                                            </div>
+                                             <div class="w-100 d-flex justify-content-between align-items-center mt mb">
+                                                <h5>Difficulty</h5>
+                                                <b>{{ todo.difficulty }}</b>
+                                            </div>
+
 
 
                                         </div>
@@ -222,12 +229,16 @@
                         <h3>description</h3>
                         <textarea name="description" class="form-control mb-3" aria-label="With textarea"></textarea>
                         <h3>deadline</h3>
-                        <input name="deadline" type="datetime-local" class="form-control" aria-label="date"
+                        <input name="deadline" type="datetime-local" class="form-control mb-3" aria-label="date"
                                aria-describedby="basic-addon1">
 
-                        <b>XP</b>
-                        <input name="xp" type="text" class="form-control" aria-label="xp"
-                               aria-describedby="basic-addon1">
+                        <h3>difficulty</h3>
+                           <select name="difficulty" class="custom-select " id="difficultySelect">
+                            <option selected>Choose...</option>
+                            <option value="1">Easy</option>
+                            <option value="2">Medium</option>
+                            <option value="3">Hard</option>
+                           </select>
 
 
                     </div>
