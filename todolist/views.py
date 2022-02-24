@@ -42,13 +42,14 @@ def index(request):
 
             return redirect(reverse('index'), kwargs={'message': 'Created successful'})
 
-        elif do == 'delete':
+        elif do == 'exchange':
             id = request.POST.get('id')
             todo = Todo.objects.get(id=id)
-
             user = User.objects.get(id=request.user.id)
-            user.xp = user.xp + todo.xp
-            user.save()
+
+            if todo.is_finished:
+                user.xp = user.xp + todo.xp
+                user.save()
 
             todo.delete()
             return redirect(reverse('index'), kwargs={'message': 'Deleted successful'})
