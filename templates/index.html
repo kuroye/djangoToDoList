@@ -161,9 +161,9 @@
 
                         </td>
                         <td>
-                            {% if todo.is_finished %}
+                            {% if todo.is_finished == True%}
                                 <span class="badge bg-info text-white">Done</span>
-                            {% else %}
+                            {% elif todo.is_finished == False %}
                                 <span class="badge bg-danger text-white">Undone</span>
                             {% endif %}
                         </td>
@@ -173,12 +173,12 @@
                                 <input type="hidden" name="do" value="toggle_status">
                                 <input type="hidden" name="id" value={{ todo.id }}>
 
-                                {% if todo.is_finished %}
+                                {% if todo.is_finished == True%}
                                     <button type="submit" class="btn btn-warning text-white" data-bs-toggle="tooltip"
                                             data-bs-placement="bottom" title="toggle status"><i
                                             class="bi bi-x-circle-fill"></i>
                                     </button>
-                                {% else %}
+                                {% elif todo.is_finished == False%}
                                     <button type="submit" class="btn btn-info" data-bs-toggle="tooltip"
                                             data-bs-placement="bottom" title="toggle status"><i
                                             class="bi bi-check-circle-fill"></i>
@@ -187,19 +187,21 @@
 
                             </form>
 
+                        {% if todo.is_finished == True %}
                             <form action="" method="post">
                                 {% csrf_token %}
                                 <input type="hidden" name="do" value="exchange">
                                 <input type="hidden" name="id" value={{ todo.id }}>
-                                <button type="submit" class="btn btn-danger"><i class="bi bi-currency-exchange"></i></button>
+                                <button type="submit" class="btn btn-light"><i class="bi bi-currency-exchange"></i></button>
                             </form>
-
+                        {% elif todo.is_finished == False%}
                             <form action="" method="post">
                                 {% csrf_token %}
-                                <input type="hidden" name="do" value="delete">
+                                <input type="hidden" name="do" value="exchange">
                                 <input type="hidden" name="id" value={{ todo.id }}>
-                                <button type="submit" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+                                <button type="submit" class="btn btn-light"><i class="bi bi-trash-fill"></i></button>
                             </form>
+                        {% endif %}
                         </td>
 
                     </tr>
