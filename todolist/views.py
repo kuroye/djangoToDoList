@@ -37,7 +37,7 @@ def index(request):
             # 下一步： 更新xp为选择困难度   xp自动生成
             xp = evaluate_xp(difficulty)
             coin = evaluate_coin(difficulty)
-            Todo.objects.create(title=title, description=description, deadline=deadline or None, xp=xp,
+            Todo.objects.create(title=title, description=description, deadline=deadline or None, xp=xp, coin=coin,
                                 difficulty=difficulty or None, creator=request.user)
 
             return redirect(reverse('index'), kwargs={'message': 'Created successful'})
@@ -49,6 +49,7 @@ def index(request):
 
             if todo.is_finished:
                 user.xp = user.xp + todo.xp
+                user.coin = user.coin + todo.coin
                 user.save()
 
             todo.delete()
