@@ -14,7 +14,7 @@ class Todo(models.Model):
 
     xp = models.IntegerField(null=True, default=0)
     difficulty = models.CharField(max_length=10, null=True)
-    coin = models.CharField(null=True, default=0)
+    coin = models.IntegerField(null=True, default=0)
     # difficulty = models.CharField(max_length=30, choices=[('c1', 'easy'),
     #                                                       ('c2', 'medium'),
     #                                                       ('c3', 'hard')])
