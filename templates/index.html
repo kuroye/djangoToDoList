@@ -85,7 +85,8 @@
 <div class="container d-flex flex-column mb-4 wrapper">
     <div class="w-100 d-flex justify-content-between align-items-center mt-3 mb-5 todo-list-header">
         <h1>{{ user.username }}: Lv.{{ user.level }}</h1>
-        <b style="padding-right: 500px">xp:{{ user.xp }}/{{ max_xp }}</b>
+        <b>xp:{{ user.xp }}/{{ max_xp }}</b>
+        <b style="padding-right: 500px">coin: {{ user.coin }}</b>
 
         <a class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
     </div>
@@ -142,6 +143,10 @@
                                             <div class="w-100 d-flex justify-content-between align-items-center mt mb">
                                                 <h4>xp</h4>
                                                 <b>{{ todo.xp }} xp</b>
+                                            </div>
+                                            <div class="w-100 d-flex justify-content-between align-items-center mt mb">
+                                                <h4>coin</h4>
+                                                <b>{{ todo.coin }} coin</b>
                                             </div>
                                              <div class="w-100 d-flex justify-content-between align-items-center mt mb">
                                                 <h5>Difficulty</h5>
@@ -243,7 +248,7 @@
 
                         <h3>difficulty</h3>
                            <select name="difficulty" class="custom-select " id="difficultySelect">
-                            <option selected>Choose...</option>
+                            <option selected>None</option>
                             <option value="easy">Easy</option>
                             <option value="medium">Medium</option>
                             <option value="hard">Hard</option>
