@@ -36,7 +36,7 @@ def index(request):
             difficulty = request.POST.get('difficulty')
             # 下一步： 更新xp为选择困难度   xp自动生成
             xp = evaluate_xp(difficulty)
-            print(xp)
+            coin = evaluate_coin(difficulty)
             Todo.objects.create(title=title, description=description, deadline=deadline or None, xp=xp,
                                 difficulty=difficulty or None, creator=request.user)
 
@@ -90,5 +90,15 @@ def evaluate_xp(difficulty):
         return random.randint(20, 100)
     elif difficulty == 'hard':
         return random.randint(100, 500)
+    elif difficulty is None:
+        return 0
+
+def evaluate_coin(difficulty):
+    if difficulty == 'easy':
+        return 0
+    elif difficulty == 'medium':
+        return random.randint(1, 10)
+    elif difficulty == 'hard':
+        return random.randint(10, 50)
     elif difficulty is None:
         return 0
