@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from utils.data import *
 # Create your views here.
 
 def shop(request):
@@ -8,7 +8,6 @@ def shop(request):
 
         user = request.user
         current_level = user.level
-        # max_xp = calculate_max_xp(current_level)
-        max_xp = current_level
+        max_xp = calculate_max_xp(current_level)
 
-        return render(request, 'shop.html', context = {'max_xp': max_xp})
+        return render(request, 'shop.html', context={'max_xp': max_xp})
