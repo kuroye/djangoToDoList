@@ -6,4 +6,9 @@ def shop(request):
 
     if request.method == 'GET':
 
-        return render(request, 'shop.html')
+        user = request.user
+        current_level = user.level
+        # max_xp = calculate_max_xp(current_level)
+        max_xp = current_level
+
+        return render(request, 'shop.html', context = {'max_xp': max_xp})
