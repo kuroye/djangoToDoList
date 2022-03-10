@@ -232,7 +232,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Add todo</h5>
+                    <h5 class="modal-title" id="addModalLabel">Add item</h5>
                 </div>
                 <form action="" method="post">
                     {% csrf_token %}
@@ -243,16 +243,21 @@
                                aria-describedby="basic-addon1" required>
                         <h3>description</h3>
                         <textarea name="description" class="form-control mb-3" aria-label="With textarea"></textarea>
-                        <h3>deadline</h3>
-                        <input name="deadline" type="datetime-local" class="form-control mb-3" aria-label="date"
+                        <h3>requirement</h3>
+                        <input name="deadline" type="text" class="form-control mb-3" aria-label="date"
                                aria-describedby="basic-addon1">
 
-                        <h3>difficulty</h3>
+                        <h3>grade</h3>
                            <select name="difficulty" class="custom-select " id="difficultySelect">
                             <option selected>None</option>
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
+                            <option value="copper">Copper</option>
+                            <option value="silver">Silver</option>
+                            <option value="gold">Gold</option>
+                            <option value="platinum">Platinum</option>
+                            <option value="diamond">Diamond</option>
+                            <option value="crown">Crown</option>
+                            <option value="king">King</option>
+                            <option value="god">God</option>
                            </select>
 
 
