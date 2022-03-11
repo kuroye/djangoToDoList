@@ -92,7 +92,7 @@
         <a class="btn btn-danger" href="{% url 'logout' %}">Log Out</a>
     </div>
 
-    {% if todos %}
+    {% if items %}
         <div class="todo-list-table-wrap">
             <table class="table table-hover">
                 <thead>
@@ -106,10 +106,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for todo in todos %}
+                {% for item in items %}
 
                     <tr>
-                        <td>{{ todo.title }}</td>
+                        <td>{{ item.name }}</td>
                         <td>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -124,34 +124,26 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="detailModalLabel{{ todo.id }}">ToDo detail</h5>
+                                            <h5 class="modal-title" id="detailModalLabel{{ todo.id }}">Item detail</h5>
                                         </div>
                                         <div class="modal-body">
                                             <h3>title</h3>
-                                            <p>{{ todo.title }}</p>
+                                            <p>{{ item.title }}</p>
                                             <h3>description</h3>
-                                            <p>{% if todo.description %}
-                                                {{ todo.description }}
+                                            <p>{% if item.description %}
+                                                {{ item.description }}
                                             {% else %}
                                                 Empty
                                             {% endif %} </p>
                                             <hr>
-                                            <div class="d-flex flex-column">
-                                                <p>create time {{ todo.create_date}}</p>
-                                                <p>deadline {{ todo.deadline }}</p>
-                                            </div>
-                                            <hr>
+
                                             <div class="w-100 d-flex justify-content-between align-items-center mt mb">
-                                                <h4>xp</h4>
-                                                <b>{{ todo.xp }} xp</b>
-                                            </div>
-                                            <div class="w-100 d-flex justify-content-between align-items-center mt mb">
-                                                <h4>coin</h4>
-                                                <b>{{ todo.coin }} coin</b>
+                                                <h4>price</h4>
+                                                <b>{{ item.price }} coin</b>
                                             </div>
                                              <div class="w-100 d-flex justify-content-between align-items-center mt mb">
-                                                <h5>Difficulty</h5>
-                                                <b>{{ todo.difficulty }}</b>
+                                                <h4>grade</h4>
+                                                <b>{{ item.grade }}</b>
                                             </div>
 
 
