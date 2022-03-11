@@ -244,11 +244,17 @@
                         <h3>description</h3>
                         <textarea name="description" class="form-control mb-3" aria-label="With textarea"></textarea>
                         <h3>requirement</h3>
-                        <input name="deadline" type="text" class="form-control mb-3" aria-label="date"
-                               aria-describedby="basic-addon1">
+                        <select name="requirement" class="custom-select mb-3" id="requirementSelect">
+
+                            <option selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+
+                        </select>
 
                         <h3>grade</h3>
-                           <select name="difficulty" class="custom-select " id="difficultySelect">
+                           <select name="grade" class="custom-select" id="gradeSelect">
                             <option selected>None</option>
                             <option value="copper">Copper</option>
                             <option value="silver">Silver</option>
