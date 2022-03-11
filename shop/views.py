@@ -8,10 +8,12 @@ def shop(request):
     if request.method == 'GET':
 
         user = request.user
+        items = Item.objects.all()
         current_level = user.level
         max_xp = calculate_max_xp(current_level)
 
-        return render(request, 'shop.html', context={'max_xp': max_xp})
+        return render(request, 'shop.html', context={'max_xp': max_xp,
+                                                     'items': items})
 
     if request.method == 'POST':
 
