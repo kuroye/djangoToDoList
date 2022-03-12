@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from utils.data import *
 from .models import Item
+from .forms import ItemForm
 # Create your views here.
 
 def shop(request):
@@ -17,13 +18,24 @@ def shop(request):
 
     if request.method == 'POST':
 
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        requirement = request.POST.get('requirement')
-        grade = request.POST.get('grade')
-        price = evaluate_price(grade)
+        # title = request.POST.get('title')
+        # description = request.POST.get('description')
+        # requirement = request.POST.get('requirement')
+        # grade = request.POST.get('grade')
+        # price = evaluate_price(grade)
 
-        Item.objects.create(name=title, description=description, requirement=requirement,
-                            grade=grade, price=price)
+        form = ItemForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            print("success \n\n")
+
+            # last_image = Item.objects.last()
+            #
+            # last_image.path = last_image.image.url
+            # last_image.save()
+
+        # Item.objects.create(name=title, description=description, requirement=requirement,
+        #                     grade=grade, price=price)
 
         return redirect(reverse('shop'), kwargs={'message': 'Created successful'})
