@@ -141,11 +141,17 @@
                                                 <h4>price</h4>
                                                 <b>{{ item.price }} coin</b>
                                             </div>
-                                             <div class="w-100 d-flex justify-content-between align-items-center mt mb">
+                                            <div class="w-100 d-flex justify-content-between align-items-center mt mb">
                                                 <h4>grade</h4>
                                                 <b>{{ item.grade }}</b>
                                             </div>
 
+                                            <hr>
+                                            <div class="w-100 d-flex justify-content-between align-items-center mt mb">
+                                                <h4>image</h4>
+                                                <img src="{{ item.image.url }}" alt="" width="400" height="400">
+
+                                            </div>
 
 
                                         </div>
@@ -159,7 +165,7 @@
 
                         </td>
                         <td>
-                            {% if todo.is_finished == True%}
+                            {% if todo.is_finished == True %}
                                 <span class="badge bg-info text-white">Done</span>
                             {% elif todo.is_finished == False %}
                                 <span class="badge bg-danger text-white">Undone</span>
@@ -171,12 +177,12 @@
                                 <input type="hidden" name="do" value="toggle_status">
                                 <input type="hidden" name="id" value={{ todo.id }}>
 
-                                {% if todo.is_finished == True%}
+                                {% if todo.is_finished == True %}
                                     <button type="submit" class="btn btn-warning text-white" data-bs-toggle="tooltip"
                                             data-bs-placement="bottom" title="toggle status"><i
                                             class="bi bi-x-circle-fill"></i>
                                     </button>
-                                {% elif todo.is_finished == False%}
+                                {% elif todo.is_finished == False %}
                                     <button type="submit" class="btn btn-info" data-bs-toggle="tooltip"
                                             data-bs-placement="bottom" title="toggle status"><i
                                             class="bi bi-check-circle-fill"></i>
@@ -185,21 +191,23 @@
 
                             </form>
 
-                        {% if todo.is_finished == True %}
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="do" value="exchange">
-                                <input type="hidden" name="id" value={{ todo.id }}>
-                                <button type="submit" class="btn btn-light"><i class="bi bi-currency-exchange"></i></button>
-                            </form>
-                        {% elif todo.is_finished == False%}
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="do" value="exchange">
-                                <input type="hidden" name="id" value={{ todo.id }}>
-                                <button type="submit" class="btn btn-light"><i class="bi bi-trash-fill"></i></button>
-                            </form>
-                        {% endif %}
+                            {% if todo.is_finished == True %}
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="do" value="exchange">
+                                    <input type="hidden" name="id" value={{ todo.id }}>
+                                    <button type="submit" class="btn btn-light"><i class="bi bi-currency-exchange"></i>
+                                    </button>
+                                </form>
+                            {% elif todo.is_finished == False %}
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="do" value="exchange">
+                                    <input type="hidden" name="id" value={{ todo.id }}>
+                                    <button type="submit" class="btn btn-light"><i class="bi bi-trash-fill"></i>
+                                    </button>
+                                </form>
+                            {% endif %}
                         </td>
 
                     </tr>
@@ -226,8 +234,10 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="addModalLabel">Add item</h5>
                 </div>
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    {{ form.as_p }}
+
                     <input type="hidden" name="do" value="add">
                     <div class="modal-body">
                         <h3>title</h3>
@@ -246,7 +256,7 @@
                         </select>
 
                         <h3>grade</h3>
-                           <select name="grade" class="custom-select" id="gradeSelect">
+                        <select name="grade" class="custom-select mb-3" id="gradeSelect">
                             <option selected>None</option>
                             <option value="copper">Copper</option>
                             <option value="silver">Silver</option>
@@ -256,7 +266,17 @@
                             <option value="crown">Crown</option>
                             <option value="king">King</option>
                             <option value="legend">Legend</option>
-                           </select>
+                        </select>
+
+                        <h3>image</h3>
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                                <input type="file" name="image" class="custom-file-input" id="inputGroupFile02">
+                                <label class="custom-file-label" for="inputGroupFile02"
+                                       aria-describedby="inputGroupFileAddon02">Choose
+                                    file</label>
+                            </div>
+                        </div>
 
 
                     </div>
