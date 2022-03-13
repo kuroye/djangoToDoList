@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, reverse
 from utils.data import *
 from .models import Item
 from .forms import ItemForm
+
+
 # Create your views here.
 
 def shop(request):
-
     if request.method == 'GET':
-
         user = request.user
         items = Item.objects.all()
         current_level = user.level
@@ -17,25 +17,24 @@ def shop(request):
                                                      'items': items})
 
     if request.method == 'POST':
+        # form = ItemForm(request.POST, request.FILES)
+        #
+        # if form.is_valid():
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        requirement = request.POST.get('requirement')
+        grade = request.POST.get('grade')
+        # image = form.
+        price = evaluate_price(grade)
 
-        # title = request.POST.get('title')
-        # description = request.POST.get('description')
-        # requirement = request.POST.get('requirement')
-        # grade = request.POST.get('grade')
-        # price = evaluate_price(grade)
 
-        form = ItemForm(request.POST, request.FILES)
 
-        if form.is_valid():
-            form.save()
-            print("success \n\n")
+        # last_image = Item.objects.last()
+        #
+        # last_image.path = last_image.image.url
+        # last_image.save()
 
-            # last_image = Item.objects.last()
-            #
-            # last_image.path = last_image.image.url
-            # last_image.save()
+    Item.objects.create(name=title, description=description, requirement=requirement,
+                        grade=grade, price=price)
 
-        # Item.objects.create(name=title, description=description, requirement=requirement,
-        #                     grade=grade, price=price)
-
-        return redirect(reverse('shop'), kwargs={'message': 'Created successful'})
+    return redirect(reverse('shop'), kwargs={'message': 'Created successful'})
