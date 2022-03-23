@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
     'todolist',
     'user',
-    'shop'
+    'shop',
+    'divider'
 ]
 
 MIDDLEWARE = [
