@@ -25,8 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('user.urls')),
     path('shop/', include('shop.urls')),
+    path('divider/', include('divider.urls')),
     path('', include('todolist.urls')),
-    path('', include('divider.urls')),
+
     # re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     # re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT})
 ]
