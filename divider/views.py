@@ -3,7 +3,7 @@ from utils.data import *
 
 # Create your views here.
 
-def shop(request):
+def divider(request):
     if request.method == 'GET':
         user = request.user
         current_money = user.money
