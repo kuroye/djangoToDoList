@@ -6,6 +6,7 @@ class User(AbstractUser):
     level = models.IntegerField(default=1)
     xp = models.IntegerField(default=0)
     coin = models.IntegerField(default=0)
+    money = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'user'
