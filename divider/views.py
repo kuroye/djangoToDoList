@@ -12,9 +12,6 @@ def divider(request):
 
     if request.method == 'POST':
 
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        requirement = request.POST.get('requirement')
         grade = request.POST.get('grade')
         price = evaluate_price(grade)
 
