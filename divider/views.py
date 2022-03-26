@@ -11,8 +11,8 @@ def divider(request):
         return render(request, 'divider.html', context={'money': current_money})
 
     if request.method == 'POST':
-
-        grade = request.POST.get('grade')
-        price = evaluate_price(grade)
-
+        user = request.user
+        money = request.POST.get('money')
+        user.money = money
+        user.save()
     return redirect(reverse('divider'), kwargs={'message': 'Created successful'})
