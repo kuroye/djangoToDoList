@@ -11,19 +11,44 @@
 
 </head>
 <body>
-<h1>{{ money }}</h1>
-<h2>生活开销 {{  need }}</h2>
-<h2>投资 {{ invest }}</h2>
-<h2>想要 {{ want }}</h2>
 
-<form method="post">
-    {% csrf_token %}
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Money</label>
-    <input type="text" name="money" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-  </div>
+<div class="container d-flex flex-column mb-4 wrapper">
+    <div class="w-100 d-flex justify-content-between align-items-center mt-3 mb-5 todo-list-header">
+        <h1>{{ money }}</h1>
+        <h2>生活开销 {{ need }}</h2>
+        <h2>投资 {{ invest }}</h2>
+        <h2>想要 {{ want }}</h2>
+    </div>
+    <div class="w-100 d-flex justify-content-between align-items-center mt-3 mb-5 todo-list-header">
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Income</label>
+                <input type="text" name="money" class="form-control" id="exampleInputEmail1"
+                       aria-describedby="emailHelp">
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+
+    </div>
+    <div class="w-100 d-flex justify-content-between align-items-center mt-3 mb-5 todo-list-header">
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Total money</label>
+                <input type="text" name="money" class="form-control" id="exampleInputEmail1"
+                       aria-describedby="emailHelp">
+            </div>
+
+            <button type="submit" class="btn btn-danger">Submit</button>
+        </form>
+
+    </div>
+</div>
+
+
 </body>
 </html>
