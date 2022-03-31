@@ -23,4 +23,5 @@ def divider(request):
         outcome = request.POST.get('outcome')
         user.money = money + income - outcome
         user.save()
+
     return redirect(reverse('divider'), kwargs={'message': 'Created successful'})
