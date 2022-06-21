@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'django_todolist.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'todolist',
-        'USER': 'postgres',
-        'PASSWORD': 'er2003618',
-        'HOST': 'localhost',
+        'NAME': 'd7e1n20kpjjch8',
+        'USER': 'lfdquzkuabjiiy',
+        'PASSWORD': '00da3411a48064d77436ca3563341aec9f44d326100ada83d8ffa86cbc017ee9',
+        'HOST': 'ec2-52-30-133-191.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
